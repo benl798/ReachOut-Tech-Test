@@ -6,8 +6,12 @@ import SavedPokemonCards from './Components/SavedPokemonCards';
 import "./App.css";
 
 const useStyles = makeStyles({
-  buttons: {
-    border: "10px solid red",
+  root: {
+      margin: '1rem',
+  },
+  button: {
+    border: "1px solid red",
+    margin: '1rem'
   },
 });
 
@@ -40,10 +44,10 @@ const App = () => {
   if (loading) return <h1>Loading Pokemon Index...</h1>;
 
   return (
-    <div className="App">
-      <div className={classes.buttons}>
+    <div className={classes.root}>
         <Button
           variant="outlined"
+          className={classes.button}
           onClick={() => {searchPokemon(generateRandomNumber(1199)); setDisplaySavedImages(false)}}
         >
           Search random Pokemon
@@ -55,11 +59,16 @@ const App = () => {
         />
         <Button
           variant="outlined"
+          className={classes.button}
           onClick={() => {searchPokemon(searchedPokemon); setDisplaySavedImages(false)}}
         >
           Search Pokemon Index
         </Button>
-        <Button variant="outlined" onClick={() => setDisplaySavedImages(true)}>
+        <Button 
+          variant="contained" 
+          color="secondary"
+          className={classes.button}
+          onClick={() => setDisplaySavedImages(true)}>
           My saved Pokemon
         </Button>
         {displaySavedImages ? (
@@ -70,7 +79,6 @@ const App = () => {
           />
         )}
       </div>
-    </div>
   );
 };
 

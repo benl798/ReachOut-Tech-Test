@@ -29,6 +29,7 @@ const PokemonCard = ({ displayedPokemon }) => {
         name: displayedPokemon.name,
         image: displayedPokemon.sprites.front_default,
         types: displayedPokemon.types,
+        abilities: displayedPokemon.abilities,
         id: nanoid(),
       })
     );
