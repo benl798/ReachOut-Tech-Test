@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { TextField, Button } from "@material-ui/core";
 import PokemonCard from "./Components/PokemonCard";
-import SavedPokemon from "./Components/SavedPokemon";
+import SavedPokemonCards from './Components/SavedPokemonCards';
 import "./App.css";
 
 const useStyles = makeStyles({
@@ -18,7 +18,6 @@ const App = () => {
   const axios = require("axios");
   const [displayedPokemonStats, setDisplayedPokemonStats] = useState({});
   const [savedPokemon, setSavedPokemon] = useState([]);
-  const [noSavedImages, setNoSavedImages] = useState(true);
   const [displaySavedImages, setDisplaySavedImages] = useState(false);
 
   const generateRandomNumber = (max) => Math.floor(Math.random() * max);
@@ -36,20 +35,16 @@ const App = () => {
       });
   };
 
-  // const displayErrorMessage = () => {
-  //   console.log("working!");
-  // };
+  console.log(displayedPokemonStats);
 
   if (loading) return <h1>Loading Pokemon Index...</h1>;
-
-  console.log(savedPokemon);
 
   return (
     <div className="App">
       <div className={classes.buttons}>
         <Button
           variant="outlined"
-          onClick={() => searchPokemon(generateRandomNumber(1199))}
+          onClick={() => {searchPokemon(generateRandomNumber(1199)); setDisplaySavedImages(false)}}
         >
           Search random Pokemon
         </Button>
@@ -60,21 +55,20 @@ const App = () => {
         />
         <Button
           variant="outlined"
-          onClick={() => searchPokemon(searchedPokemon)}
+          onClick={() => {searchPokemon(searchedPokemon); setDisplaySavedImages(false)}}
         >
           Search Pokemon Index
         </Button>
-        <Button
-          variant="outlined"
-          onClick={() => setDisplaySavedImages(true)}
-        >
+        <Button variant="outlined" onClick={() => setDisplaySavedImages(true)}>
           My saved Pokemon
         </Button>
-        <PokemonCard setNoSavedImages={setNoSavedImages} displayedPokemon={displayedPokemonStats} savedPokemon={savedPokemon}/>
-        {/* {savedPokemon?.length
-          ? [savedPokemon.map((pokemon) => <div>{pokemon.name}</div>)]
-          : null} */}
-        {displaySavedImages ? <SavedPokemon savedPokemon={savedPokemon}/> : null}
+        {displaySavedImages ? (
+          <SavedPokemonCards />
+        ) : (
+          <PokemonCard
+            displayedPokemon={displayedPokemonStats}
+          />
+        )}
       </div>
     </div>
   );

@@ -3,52 +3,50 @@ import PropTypes from "prop-types"; // ES6
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
-import { useDispatch } from "react-redux";
-import { addPokemon } from "../store/slices/pokemonSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addPokemon, deletePokemon } from "../store/slices/pokemonSlice";
 import { nanoid } from "nanoid";
 
-const PokemonCard = ({ displayedPokemon, savedPokemon, setNoSavedImages }) => {
+const PokemonCard = ({ displayedPokemon }) => {
   const [pokemonLiked, setPokemonLiked] = useState(false);
+  const pokemonList = useSelector((state) => state.pokemon.pokemon);
   const dispatch = useDispatch();
-  const name = displayedPokemon.name;
 
   if (!displayedPokemon || Object.keys(displayedPokemon).length === 0)
     return null;
 
+  // remove liked icon from displayCard if removed in state 
+  // remove from state object if unliked
 
-  const saveThisPokemon = () => {
-    savedPokemon.push(displayedPokemon);
-    setNoSavedImages(false);
-  };
-
-  const removeThisPokemon = () => {
-    savedPokemon.pop();
-    setPokemonLiked(false);
+  const deletePokemonHandler = (id) => {
+    dispatch(deletePokemon(id));
   };
 
   const addPokemonHandler = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     dispatch(
       addPokemon({
         name: displayedPokemon.name,
         image: displayedPokemon.sprites.front_default,
-        id: nanoid()
-      }))
+        types: displayedPokemon.types,
+        id: nanoid(),
+      })
+    );
   };
-
-  // if (savedPokemon.some((pokemon) => pokemon.name === displayedPokemon.name)) pokemonLiked(false);
 
   return (
     <div>
       {pokemonLiked ? (
-        <IconButton onClick={removeThisPokemon}>
+        <IconButton
+          onClick={() => setPokemonLiked(false)}
+        >
           <FavoriteIcon />
         </IconButton>
       ) : (
         <IconButton
-          onClick={() => {
+          onClick={(e) => {
             setPokemonLiked(true);
-            addPokemonHandler();
+            addPokemonHandler(e);
           }}
         >
           <FavoriteBorderIcon />
@@ -65,8 +63,6 @@ const PokemonCard = ({ displayedPokemon, savedPokemon, setNoSavedImages }) => {
 
 PokemonCard.propTypes = {
   displayedPokemon: PropTypes.object.isRequired,
-  savedPokemon: PropTypes.array.isRequired,
-  setNoSavedImages: PropTypes.bool.isRequired,
 };
 
 export default PokemonCard;

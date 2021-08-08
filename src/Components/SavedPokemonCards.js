@@ -1,11 +1,8 @@
 import React from "react";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import IconButton from "@material-ui/core/IconButton";
-import PropTypes from "prop-types"; // ES6
 import { useSelector, useDispatch } from "react-redux";
 import { deletePokemon } from "../store/slices/pokemonSlice";
 
-const SavedPokemonCards = ({ savedPokemon }) => {
+const SavedPokemonCards = () => {
   const pokemonList = useSelector((state) => state.pokemon.pokemon);
   const dispatch = useDispatch();
 
@@ -14,18 +11,32 @@ const SavedPokemonCards = ({ savedPokemon }) => {
   };
 
   const pokemonTable = pokemonList.map((pokemon) => (
-    <tr>
-      <td>{pokemon.name}</td>
-      <td>
-        <img src={pokemon.image} alt="Pokemon"/>
-      </td>
+    <div>
+      <div>{pokemon.name}</div>
+      {pokemon.types.map((type) => (
+        <div>{type.type.name}</div>
+      ))}
+      <img src={pokemon.image} alt="Pokemon" />
       <button
         className="delete"
         onClick={() => deletePokemonHandler({ id: pokemon.id })}
       >
         x
       </button>
-    </tr>
+    </div>
+
+    // <tr>
+    //   <td>{pokemon.name}</td>
+    //   <td>
+    //     <img src={pokemon.image} alt="Pokemon"/>
+    //   </td>
+    //   <button
+    //     className="delete"
+    //     onClick={() => deletePokemonHandler({ id: pokemon.id })}
+    //   >
+    //     x
+    //   </button>
+    // </tr>
   ));
 
   // const pokemonTable = pokemon.map((pokemon) => {
@@ -36,12 +47,6 @@ const SavedPokemonCards = ({ savedPokemon }) => {
   // })
   return (
     <div>
-      {/* {savedPokemon.map((pokemon) => (
-        <div>
-          <div>{pokemon.name}</div>
-          <img src={pokemon.sprites.front_default} alt="Pokemon sprite" />
-        </div>
-      ))} */}
       <h1>Saved Pokemon</h1>
       <table>
         <tr>
@@ -51,10 +56,6 @@ const SavedPokemonCards = ({ savedPokemon }) => {
       </table>
     </div>
   );
-};
-
-SavedPokemonCards.propTypes = {
-  savedPokemon: PropTypes.array.isRequired,
 };
 
 export default SavedPokemonCards;
