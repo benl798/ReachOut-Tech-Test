@@ -22,13 +22,16 @@ const useStyles = makeStyles({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    background: "rgb(255, 203, 5)",
+    border: "5px solid #3B4CCA",
+    background: "#FFDE00",
     "&:hover": {
-      background: "rgb(199, 160, 8)",
-      border: "3px solid rgb(60, 90, 166)",
+      background: "#B3A125",
+      border: "5px solid rgb(60, 90, 166)",
     },
-    border: "3px solid rgb(61,125,202)",
-    color: "black",
+    color: "#3B4CCA",
+    fontWeight: 600,
+    fontSize: 15,
+    lineHeight: 1.25
   },
 });
 

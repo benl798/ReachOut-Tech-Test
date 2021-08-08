@@ -15,6 +15,8 @@ const PokemonCard = ({ displayedPokemon }) => {
   if (!displayedPokemon || Object.keys(displayedPokemon).length === 0)
     return null;
 
+    console.log(displayedPokemon);
+
   // remove liked icon from displayCard if removed in state 
   // remove from state object if unliked
 
@@ -30,6 +32,7 @@ const PokemonCard = ({ displayedPokemon }) => {
         image: displayedPokemon.sprites.front_default,
         types: displayedPokemon.types,
         abilities: displayedPokemon.abilities,
+        hp: displayedPokemon.stats[0],
         id: nanoid(),
       })
     );
@@ -53,11 +56,6 @@ const PokemonCard = ({ displayedPokemon }) => {
           <FavoriteBorderIcon />
         </IconButton>
       )}
-      <h1>{displayedPokemon.name}</h1>
-      {displayedPokemon.types.map((type) => (
-        <div>{type.type.name}</div>
-      ))}
-      <img src={displayedPokemon.sprites.front_default} alt="Pokemon sprite" />
     </div>
   );
 };

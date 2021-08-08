@@ -7,8 +7,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import MergeTypeIcon from "@material-ui/icons/MergeType";
 import Divider from "@material-ui/core/Divider";
-import Typography from '@material-ui/core/Typography';
-
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles({
   card: {
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
     alignContent: "center",
     border: "5px solid black",
     textTransform: "uppercase",
-    marginTop: '1rem'
+    marginTop: "1rem",
   },
   upperContainer: {
     height: "100px",
@@ -47,19 +46,31 @@ const useStyles = makeStyles({
   types: {
     margin: "5px",
     backgroundColor: "#F73718",
-    border: '3px solid #CC0000',
+    border: "3px solid #CC0000",
     padding: 5,
     fontSize: 15,
   },
   header: {
     fontSize: 20,
     margin: 0,
-    paddingTop: 10
+    paddingTop: 10,
+  },
+  name: {
+    paddingBottom: 10,
+  },
+  hp: {
+    marginLeft: 5,
+    border: "3px solid #CC0000",
+    color: 'white',
+    background: 'black',
+    fontWeight: 600
   }
 });
 
 const Card = ({ pokemon }) => {
   const classes = useStyles();
+
+  console.log(pokemon.hp.base_stat);
 
   return (
     <div className={classes.card}>
@@ -74,7 +85,10 @@ const Card = ({ pokemon }) => {
         </div>
       </div>
       <div className={classes.lowerContainer}>
-        <Typography>{pokemon.name}</Typography>
+        <Typography className={classes.name}>
+          {pokemon.name}
+          <Chip className={classes.hp} label={`HP: ${pokemon.hp.base_stat}`} />
+        </Typography>
         <Divider variant="middle" />
         <Typography className={classes.header}>Types</Typography>
         <div className={classes.pillContainer}>
