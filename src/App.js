@@ -42,7 +42,7 @@ const App = () => {
 
   if (loading) return <h1>Loading Pokemon Index...</h1>;
 
-  // console.log(savedPokemon.length);
+  console.log(savedPokemon);
 
   return (
     <div className="App">
@@ -66,15 +66,14 @@ const App = () => {
         </Button>
         <Button
           variant="outlined"
-          disabled={noSavedImages}
           onClick={() => setDisplaySavedImages(true)}
         >
           My saved Pokemon
         </Button>
         <PokemonCard setNoSavedImages={setNoSavedImages} displayedPokemon={displayedPokemonStats} savedPokemon={savedPokemon}/>
-        {savedPokemon?.length
+        {/* {savedPokemon?.length
           ? [savedPokemon.map((pokemon) => <div>{pokemon.name}</div>)]
-          : null}
+          : null} */}
         {displaySavedImages ? <SavedPokemon savedPokemon={savedPokemon}/> : null}
       </div>
     </div>
