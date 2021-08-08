@@ -12,14 +12,14 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   card: {
-    width: 300,
-    height: 430,
+    width: 320,
     background: "white",
     borderRadius: "10px",
     boxShadow: "0px 1px 10px 1px black",
     alignContent: "center",
     border: "5px solid black",
     textTransform: "uppercase",
+    marginTop: '1rem'
   },
   upperContainer: {
     height: "100px",
@@ -29,25 +29,27 @@ const useStyles = makeStyles({
     background: "white",
     borderRadius: "50%",
     border: "5px solid black",
-    transform: "translate(95px,45px)",
+    transform: "translate(105px,45px)",
   },
   lowerContainer: {
     background: "white",
     textAlign: "center",
     marginTop: "60px",
   },
-  typesContainer: {
+  pillContainer: {
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
     listStyle: "none",
     margin: 0,
-    padding: "0px 0px 10px",
+    padding: "0px 5px 10px",
   },
   types: {
     margin: "5px",
     backgroundColor: "#F73718",
-    fontSize: "15px",
+    border: '3px solid #CC0000',
+    padding: 5,
+    fontSize: 15,
   },
   header: {
     fontSize: 20,
@@ -66,7 +68,6 @@ const Card = ({ pokemon }) => {
           <img
             src={pokemon.image}
             alt="Pokemon"
-            // height="100px"
             width="100px"
             className={classes.imageContainer}
           />
@@ -76,7 +77,7 @@ const Card = ({ pokemon }) => {
         <Typography>{pokemon.name}</Typography>
         <Divider variant="middle" />
         <Typography className={classes.header}>Types</Typography>
-        <div className={classes.typesContainer}>
+        <div className={classes.pillContainer}>
           {pokemon.types.map((type) => (
             <Chip
               icon={<MergeTypeIcon />}
@@ -88,7 +89,7 @@ const Card = ({ pokemon }) => {
         </div>
         <Divider variant="middle" />
         <Typography className={classes.header}>Abilities</Typography>
-        <div className={classes.typesContainer}>
+        <div className={classes.pillContainer}>
           {pokemon.abilities.map((ability) => (
             <Chip
               icon={<FlashOnIcon />}

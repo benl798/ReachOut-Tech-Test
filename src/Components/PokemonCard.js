@@ -9,7 +9,7 @@ import { nanoid } from "nanoid";
 
 const PokemonCard = ({ displayedPokemon }) => {
   const [pokemonLiked, setPokemonLiked] = useState(false);
-  const pokemonList = useSelector((state) => state.pokemon.pokemon);
+  // const pokemonList = useSelector((state) => state.pokemon.pokemon);
   const dispatch = useDispatch();
 
   if (!displayedPokemon || Object.keys(displayedPokemon).length === 0)
