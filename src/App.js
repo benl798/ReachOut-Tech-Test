@@ -3,29 +3,21 @@ import { makeStyles } from "@material-ui/styles";
 import PokemonCard from "./Components/PokemonCard";
 import SavedPokemonCards from "./Components/SavedPokemonCards";
 import Buttons from "./Components/Buttons";
-import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { addPokemon, deletePokemon } from "./store/slices/pokemonSlice";
+import pokemonBackground from './Images/pokemonBackground.png'
 import { nanoid } from "nanoid";
 import "./App.css";
 
 const useStyles = makeStyles({
   root: {
-    margin: "1rem",
-    fontWeight: 600,
-  },
-  button: {
-    border: "1px solid red",
-    margin: "1rem",
-  },
-  divider: {
-    background: "#F73718",
-    height: "0.5vh",
-    borderRadius: 50,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundImage: `url(${pokemonBackground})`,
+    backgroundRepeat: 'no-repeat',
+    width: '100%',
+    minHeight: '100vh',
+    backgroundPosition: 'center top',
+    backgroundSize: 'cover',
+    paddingTop: '3rem'
   },
 });
 
@@ -62,13 +54,12 @@ const App = () => {
   
   return (
     <div className={classes.root}>
-      <Typography>ReachOut Pokemon Index</Typography>
       <Buttons
         setDisplayedPokemonStats={setDisplayedPokemonStats}
         setDisplaySavedImages={setDisplaySavedImages}
         setPokemonSaved={setPokemonSaved}
       />
-      <Divider variant="middle" classes={{ root: classes.divider }} />
+      <div className={classes.results}>
       {displaySavedImages ? (
         <SavedPokemonCards
           setDisplaySavedImages={setDisplaySavedImages}
@@ -83,6 +74,7 @@ const App = () => {
           setPokemonSaved={setPokemonSaved}
         />
       )}
+      </div>
     </div>
   );
 };

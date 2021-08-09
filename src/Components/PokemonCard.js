@@ -6,9 +6,10 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   root: {
     display: "grid",
+    width: "100%",
     justifyContent: "center",
+    gridTemplateColumns: "auto auto auto",
     paddingTop: "1rem",
-    // position in the middle
   },
 });
 

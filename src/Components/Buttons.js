@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import React from "react";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import PropTypes from "prop-types"; // ES6
 
@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     justifyContent: "center",
     gridTemplateColumns: "auto auto auto",
     gap: "2rem",
-    paddingBottom: "1rem",
   },
   button: {
     width: "100%",
@@ -22,15 +21,16 @@ const useStyles = makeStyles({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    border: "5px solid black",
-    background: "rgba(247,55,24,0.5)",
+    border: "5px solid #CC0000",
+    background: "#F73718",
     "&:hover": {
+      border: '5px solid black',
       background: "#F73718",
     },
-    color: "black",
+    color: "white",
     fontWeight: 600,
-    fontSize: 15,
-    lineHeight: 1.25
+    fontSize: 18,
+    lineHeight: 1.25,
   },
 });
 
@@ -38,8 +38,6 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
   const classes = useStyles();
   const axios = require("axios");
   const generateRandomNumber = (max) => Math.floor(Math.random() * max);
-  // const [searchedPokemon, setSearchedPokemon] = useState("");
-  // TODO: Integrate search box
 
   const searchPokemon = (props) => {
     axios
@@ -49,7 +47,6 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
         setPokemonSaved(false);
       })
       .catch(function (error) {
-        setDisplayedPokemonStats({});
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -60,7 +57,6 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
     <div className={classes.root}>
       <Button
         variant="contained"
-        color="primary"
         className={classes.button}
         onClick={() => {
           searchPokemon(generateRandomNumber(1199));
@@ -69,29 +65,13 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
       >
         Search random Pokemon
       </Button>
-      {/* <TextField
-        variant="outlined"
-        label="Search Pokemon Index "
-        className={classes.button}
-        onChange={(event) => setSearchedPokemon(event.target.value)}
-      /> */}
-      {/* <Button
-        variant="outlined"
-        className={classes.button}
-        onClick={() => {
-          searchPokemon(searchedPokemon);
-          setDisplaySavedImages(false);
-        }}
-      >
-        Search Pokemon Index
-      </Button> */}
       <Button
         variant="contained"
         color="secondary"
         className={classes.button}
         onClick={() => setDisplaySavedImages(true)}
       >
-        My saved Pokemon
+        My Pokedex
       </Button>
     </div>
   );

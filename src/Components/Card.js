@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     border: "5px solid black",
     textTransform: "uppercase",
     marginTop: "1rem",
+    marginBottom: '1rem',
     position: "relative",
   },
   upperContainer: {
@@ -52,21 +53,23 @@ const useStyles = makeStyles({
     backgroundColor: "#F73718",
     border: "3px solid #CC0000",
     padding: 5,
-    fontSize: 15,
+    fontWeight: 600
   },
   header: {
     fontSize: 20,
     paddingTop: 10,
-  },
+    fontWeight: 600,
+    },
   name: {
     paddingBottom: 10,
+    fontSize: 30,
+    fontWeight: 600,
   },
   hp: {
     marginLeft: 5,
     border: "3px solid #CC0000",
     color: "white",
     backgroundColor: "#F73718",
-    fontWeight: 600,
   },
   buttons: {
     height: 0,
