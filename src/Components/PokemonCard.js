@@ -1,67 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types"; // ES6
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import IconButton from "@material-ui/core/IconButton";
-import { useDispatch, useSelector } from "react-redux";
-import { addPokemon, deletePokemon } from "../store/slices/pokemonSlice";
-import { nanoid } from "nanoid";
+import Card from "./Card";
+import { makeStyles } from "@material-ui/styles";
 
-const PokemonCard = ({ displayedPokemon }) => {
-  const [pokemonLiked, setPokemonLiked] = useState(false);
-  // const pokemonList = useSelector((state) => state.pokemon.pokemon);
-  const dispatch = useDispatch();
+const useStyles = makeStyles({
+  root: {
+    display: "grid",
+    justifyContent: "center",
+    paddingTop: "1rem",
+    // position in the middle
+  },
+});
+
+const PokemonCard = ({ displayedPokemon, addPokemonHandler, pokemonSaved, setPokemonSaved }) => {
+  const classes = useStyles();
 
   if (!displayedPokemon || Object.keys(displayedPokemon).length === 0)
     return null;
 
-    console.log(displayedPokemon);
+  const displayedPokemonCard = displayedPokemon.map((pokemon) => (
+    <Card
+      pokemon={pokemon}
+      addPokemonHandler={addPokemonHandler}
+      displayingMyPokedex={false}
+      pokemonSaved={pokemonSaved}
+      setPokemonSaved={setPokemonSaved}
+    />
+  ));
 
-  // remove liked icon from displayCard if removed in state 
-  // remove from state object if unliked
-
-  const deletePokemonHandler = (id) => {
-    dispatch(deletePokemon(id));
-  };
-
-  const addPokemonHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      addPokemon({
-        name: displayedPokemon.name,
-        image: displayedPokemon.sprites.front_default,
-        types: displayedPokemon.types,
-        abilities: displayedPokemon.abilities,
-        hp: displayedPokemon.stats[0],
-        id: nanoid(),
-      })
-    );
-  };
-
-  return (
-    <div>
-      {pokemonLiked ? (
-        <IconButton
-          onClick={() => setPokemonLiked(false)}
-        >
-          <FavoriteIcon />
-        </IconButton>
-      ) : (
-        <IconButton
-          onClick={(e) => {
-            setPokemonLiked(true);
-            addPokemonHandler(e);
-          }}
-        >
-          <FavoriteBorderIcon />
-        </IconButton>
-      )}
-    </div>
-  );
+  return <div className={classes.root}>{displayedPokemonCard}</div>;
 };
 
 PokemonCard.propTypes = {
-  displayedPokemon: PropTypes.object.isRequired,
+  displayedPokemon: PropTypes.array.isRequired,
+  addPokemonHandler: PropTypes.func,
+  pokemonSaved: PropTypes.bool,
+  setPokemonSaved: PropTypes.func,
 };
 
 export default PokemonCard;

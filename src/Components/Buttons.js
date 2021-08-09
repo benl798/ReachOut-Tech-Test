@@ -5,12 +5,12 @@ import PropTypes from "prop-types"; // ES6
 
 const useStyles = makeStyles({
   root: {
-    padding: "1rem",
-    margin: "auto",
-    width: "60%",
-    display: "flex",
-    flexWrap: "wrap",
-    columnGap: 12,
+    display: "grid",
+    width: "100%",
+    justifyContent: "center",
+    gridTemplateColumns: "auto auto auto",
+    gap: "2rem",
+    paddingBottom: "1rem",
   },
   button: {
     width: "100%",
@@ -22,32 +22,34 @@ const useStyles = makeStyles({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    border: "5px solid #3B4CCA",
-    background: "#FFDE00",
+    border: "5px solid black",
+    background: "rgba(247,55,24,0.5)",
     "&:hover": {
-      background: "#B3A125",
-      border: "5px solid rgb(60, 90, 166)",
+      background: "#F73718",
     },
-    color: "#3B4CCA",
+    color: "black",
     fontWeight: 600,
     fontSize: 15,
     lineHeight: 1.25
   },
 });
 
-const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages }) => {
+const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSaved }) => {
   const classes = useStyles();
   const axios = require("axios");
   const generateRandomNumber = (max) => Math.floor(Math.random() * max);
-  const [searchedPokemon, setSearchedPokemon] = useState("");
+  // const [searchedPokemon, setSearchedPokemon] = useState("");
+  // TODO: Integrate search box
 
   const searchPokemon = (props) => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${props}/`)
       .then(function (response) {
-        setDisplayedPokemonStats(response.data);
+        setDisplayedPokemonStats([...[], response.data]);
+        setPokemonSaved(false);
       })
       .catch(function (error) {
+        setDisplayedPokemonStats({});
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -73,7 +75,7 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages }) => {
         className={classes.button}
         onChange={(event) => setSearchedPokemon(event.target.value)}
       /> */}
-      <Button
+      {/* <Button
         variant="outlined"
         className={classes.button}
         onClick={() => {
@@ -82,7 +84,7 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages }) => {
         }}
       >
         Search Pokemon Index
-      </Button>
+      </Button> */}
       <Button
         variant="contained"
         color="secondary"
@@ -98,6 +100,7 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages }) => {
 Buttons.propTypes = {
   setDisplayedPokemonStats: PropTypes.func.isRequired,
   setDisplaySavedImages: PropTypes.func.isRequired,
+  setPokemonSaved: PropTypes.func
 };
 
 export default Buttons;

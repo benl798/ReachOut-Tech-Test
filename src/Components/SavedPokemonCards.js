@@ -1,36 +1,32 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deletePokemon } from "../store/slices/pokemonSlice";
 import { makeStyles } from "@material-ui/styles";
-import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
-import Card from './Card';
+import Card from "./Card";
+import PropTypes from "prop-types"; // ES6
 
 const useStyles = makeStyles({
   root: {
     display: "grid",
-    width: '100%',
+    width: "100%",
     justifyContent: "center",
     gridTemplateColumns: "auto auto auto",
-    gap: '2rem',
+    gap: "2rem",
     paddingTop: "1rem",
   },
 });
 
-const SavedPokemonCards = () => {
+const SavedPokemonCards = ({ deletePokemonHandler, pokemonList }) => {
   const classes = useStyles();
-  const pokemonList = useSelector((state) => state.pokemon.pokemon);
-  const dispatch = useDispatch();
-
-  const deletePokemonHandler = (id) => {
-    dispatch(deletePokemon(id));
-  };
 
   const pokemonTable = pokemonList.map((pokemon) => (
-    <Card pokemon={pokemon} />
+    <Card pokemon={pokemon} deletePokemonHandler={deletePokemonHandler} />
   ));
 
   return <div className={classes.root}>{pokemonTable}</div>;
+};
+
+SavedPokemonCards.propTypes = {
+  deletePokemonHandler: PropTypes.func,
+  pokemonList: PropTypes.object,
 };
 
 export default SavedPokemonCards;
