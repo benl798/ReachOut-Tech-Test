@@ -5,20 +5,29 @@ import SavedPokemonCards from "./Components/SavedPokemonCards";
 import Buttons from "./Components/Buttons";
 import { useDispatch, useSelector } from "react-redux";
 import { addPokemon, deletePokemon } from "./store/slices/pokemonSlice";
-import pokemonBackground from './Images/pokemonBackground.png'
+import pokemonBackground from "./Images/pokemonBackground.png";
+import Alert from "@material-ui/lab/Alert";
 import { nanoid } from "nanoid";
 import "./App.css";
 
 const useStyles = makeStyles({
   root: {
-    backgroundRepeat: 'no-repeat',
-    width: '100%',
-    minHeight: '100vh',
-    backgroundPosition: 'center top',
-    backgroundSize: 'cover',
-    paddingTop: '3rem',
+    backgroundRepeat: "no-repeat",
+    width: "100%",
+    minHeight: "100vh",
+    backgroundPosition: "center top",
+    backgroundSize: "cover",
+    paddingTop: "3rem",
     backgroundImage: `url(${pokemonBackground})`,
   },
+  alert: {
+    border: '2px solid black',
+    justifyContent: 'center',
+    margin: 'auto',
+    marginTop: '1rem',
+    width: '30%',
+    fontWeight: 600
+  }
 });
 
 const App = () => {
@@ -58,23 +67,26 @@ const App = () => {
         setDisplayAlertMessage={setDisplayAlertMessage}
       />
       <div className={classes.results}>
-      {displaySavedImages ? (
-        <SavedPokemonCards
-          setDisplaySavedImages={setDisplaySavedImages}
-          deletePokemonHandler={deletePokemonHandler}
-          pokemonList={pokemonList}
-        />
-      ) : (
-        <PokemonCard
-          displayedPokemon={displayedPokemonStats}
-          addPokemonHandler={addPokemonHandler}
-          pokemonSaved={pokemonSaved}
-          setPokemonSaved={setPokemonSaved}
-        />
-      )}
+        {displaySavedImages ? (
+          <SavedPokemonCards
+            setDisplaySavedImages={setDisplaySavedImages}
+            deletePokemonHandler={deletePokemonHandler}
+            pokemonList={pokemonList}
+          />
+        ) : (
+          <PokemonCard
+            displayedPokemon={displayedPokemonStats}
+            addPokemonHandler={addPokemonHandler}
+            pokemonSaved={pokemonSaved}
+            setPokemonSaved={setPokemonSaved}
+          />
+        )}
       </div>
-      {displayAlertMessage ? 
-      <h1>yes</h1> : <h1>no</h1>}
+      {displayAlertMessage ? (
+        <Alert className={classes.alert} variant="filled" severity="error">
+          Something went wrong! Please try again!
+        </Alert>
+      ) : null}
     </div>
   );
 };

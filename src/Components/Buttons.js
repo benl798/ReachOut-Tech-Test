@@ -26,9 +26,10 @@ const useStyles = makeStyles({
     justifyContent: "center",
     border: "5px solid #CC0000",
     color: "white",
+    textTransform: "capitalize",
     background: "#F73718",
     "&:hover": {
-      border: '5px solid black',
+      border: "5px solid black",
       background: "#F73718",
     },
   },

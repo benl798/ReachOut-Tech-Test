@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     boxShadow: "0px 1px 10px 1px black",
     alignContent: "center",
     border: "5px solid black",
-    textTransform: "uppercase",
+    textTransform: "capitalize",
     marginTop: "1rem",
     marginBottom: '1rem',
     position: "relative",
@@ -96,8 +96,6 @@ const useStyles = makeStyles({
 
 const Card = ({ pokemon, deletePokemonHandler, displayingMyPokedex = true, addPokemonHandler, pokemonSaved, setPokemonSaved }) => {
   const classes = useStyles();
-
-  if (!pokemon) return null;
   return (
     <div className={classes.card}>
 
