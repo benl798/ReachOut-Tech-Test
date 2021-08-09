@@ -16,6 +16,8 @@ const useStyles = makeStyles({
 const PokemonCard = ({ displayedPokemon, addPokemonHandler, pokemonSaved, setPokemonSaved }) => {
   const classes = useStyles();
 
+  // Nice to have/WWON -> Display unique 'like/heart' button per new Pokemon passed in, currently set using 'pokemonSaved' variable
+
   if (!displayedPokemon || Object.keys(displayedPokemon).length === 0)
     return null;
 

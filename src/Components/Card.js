@@ -54,6 +54,7 @@ const useStyles = makeStyles({
     border: "3px solid #CC0000",
     padding: 5,
     fontWeight: 600
+    // Nice to have/WWON -> Match each individual 'type' to its respective colours 
   },
   header: {
     fontSize: 20,
@@ -123,6 +124,7 @@ const Card = ({ pokemon, deletePokemonHandler, displayingMyPokedex = true, addPo
                   setPokemonSaved(true);
                 }}
                 className={classes.buttons}
+                // Nice to have/WWON -> Toggle button to push/pop the object into the 'saved Pokemon' list
               >
                 <FavoriteBorderIcon fontSize="large" />
               </IconButton>

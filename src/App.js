@@ -11,26 +11,25 @@ import "./App.css";
 
 const useStyles = makeStyles({
   root: {
-    backgroundImage: `url(${pokemonBackground})`,
     backgroundRepeat: 'no-repeat',
     width: '100%',
     minHeight: '100vh',
     backgroundPosition: 'center top',
     backgroundSize: 'cover',
-    paddingTop: '3rem'
+    paddingTop: '3rem',
+    backgroundImage: `url(${pokemonBackground})`,
   },
 });
 
 const App = () => {
   const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [displayedPokemonStats, setDisplayedPokemonStats] = useState([]);
-  const [displaySavedImages, setDisplaySavedImages] = useState(false);
-  const [pokemonSaved, setPokemonSaved] = useState(false);
   const dispatch = useDispatch();
   const pokemonList = useSelector((state) => state.pokemon.pokemon);
 
-  if (loading) return <h1>Loading Pokemon Index...</h1>;
+  const [displayedPokemonStats, setDisplayedPokemonStats] = useState([]);
+  const [displaySavedImages, setDisplaySavedImages] = useState(false);
+  const [pokemonSaved, setPokemonSaved] = useState(false);
+  const [displayAlertMessage, setDisplayAlertMessage] = useState(false);
 
   const addPokemonHandler = (e, pokemon) => {
     e.preventDefault();
@@ -50,14 +49,13 @@ const App = () => {
     dispatch(deletePokemon(id));
   };
 
-  console.log(pokemonSaved);
-  
   return (
     <div className={classes.root}>
       <Buttons
         setDisplayedPokemonStats={setDisplayedPokemonStats}
         setDisplaySavedImages={setDisplaySavedImages}
         setPokemonSaved={setPokemonSaved}
+        setDisplayAlertMessage={setDisplayAlertMessage}
       />
       <div className={classes.results}>
       {displaySavedImages ? (
@@ -75,6 +73,8 @@ const App = () => {
         />
       )}
       </div>
+      {displayAlertMessage ? 
+      <h1>yes</h1> : <h1>no</h1>}
     </div>
   );
 };

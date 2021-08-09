@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import Card from "./Card";
-import PropTypes from "prop-types"; // ES6
+import PropTypes from "prop-types"; 
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +16,9 @@ const useStyles = makeStyles({
 
 const SavedPokemonCards = ({ deletePokemonHandler, pokemonList }) => {
   const classes = useStyles();
+
+  if (Object.keys(pokemonList).length === 0) 
+    return null;
 
   const pokemonTable = pokemonList.map((pokemon) => (
     <Card pokemon={pokemon} deletePokemonHandler={deletePokemonHandler} />

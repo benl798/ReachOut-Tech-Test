@@ -12,29 +12,29 @@ const useStyles = makeStyles({
     gap: "2rem",
   },
   button: {
+    height: 60,
+    maxWidth: 250,
+    fontSize: 18,
+    borderRadius: 50,
+    lineHeight: 1.25,
+    fontWeight: 600,
     width: "100%",
     cursor: "pointer",
-    height: 60,
     display: "flex",
-    maxWidth: 250,
     padding: "8px 16px 8px 12px",
-    borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
     border: "5px solid #CC0000",
+    color: "white",
     background: "#F73718",
     "&:hover": {
       border: '5px solid black',
       background: "#F73718",
     },
-    color: "white",
-    fontWeight: 600,
-    fontSize: 18,
-    lineHeight: 1.25,
   },
 });
 
-const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSaved }) => {
+const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSaved, setDisplayAlertMessage }) => {
   const classes = useStyles();
   const axios = require("axios");
   const generateRandomNumber = (max) => Math.floor(Math.random() * max);
@@ -45,8 +45,10 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
       .then(function (response) {
         setDisplayedPokemonStats([...[], response.data]);
         setPokemonSaved(false);
+        setDisplayAlertMessage(false);
       })
       .catch(function (error) {
+        setDisplayAlertMessage(true);
         console.log(error.response.data);
         console.log(error.response.status);
         console.log(error.response.headers);
@@ -69,7 +71,7 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
         variant="contained"
         color="secondary"
         className={classes.button}
-        onClick={() => setDisplaySavedImages(true)}
+        onClick={() => {setDisplaySavedImages(true); setDisplayAlertMessage(false);}}
       >
         My Pokedex
       </Button>
@@ -80,7 +82,8 @@ const Buttons = ({ setDisplayedPokemonStats, setDisplaySavedImages, setPokemonSa
 Buttons.propTypes = {
   setDisplayedPokemonStats: PropTypes.func.isRequired,
   setDisplaySavedImages: PropTypes.func.isRequired,
-  setPokemonSaved: PropTypes.func
+  setPokemonSaved: PropTypes.func.isRequired,
+  setDisplayAlertMessage: PropTypes.func.isRequired,
 };
 
 export default Buttons;
